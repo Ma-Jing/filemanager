@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if session.logged_in %}
+        <form action="{{ url_for('add_entry') }}" method=post enctype=multipart/form-data class=add-entry>
+            <p><input type=file name=file>
+            <input type=submit value=上传>
+        </form>
+    {% endif %}
+    <br>
+    <h2>证书信息列表</h2>
+    <br>
+    <table border="1">
+        <tr>
+            <th>证书名称</th>
+            <th>是否过期</th>
+            <th>客户名称</th>
+            <th>客服负责人</th>
+            <!--th>运维负责人</th-->
+        </tr>
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.file }}</td>
+                <td align=center>{{ entry.time }}</td>
+                <td align=center>暂无</td>
+                <td align=center>佚名</td>
+            </tr>
+        {% else %}
+            <em>暂时没有证书</em>
+        {% endfor %}
+    </table>
+{% endblock %}
+
